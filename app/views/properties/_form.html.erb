@@ -1,8 +1,7 @@
-<%= form_with(model: property, local: true) do |form| %>
+<%= form_with(model: property, local: true ,url: choose_new_or_edit) do |form| %>
   <% if property.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
-
       <ul>
         <% property.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,29 +10,43 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div>
     <%= form.label :property %>
-    <%= form.text_field :property %>
-  </div>
+    <%= form.text_field :propert %>
 
-  <div class="field">
     <%= form.label :rent %>
-    <%= form.number_field :rent %>
-  </div>
+    <%= form.number_field :rent %><span> RWF </span>
 
-  <div class="field">
     <%= form.label :address %>
-    <%= form.text_area :address %>
-  </div>
+    <%= form.text_field :address %><span> year/year old </span>
 
-  <div class="field">
     <%= form.label :building_age %>
     <%= form.number_field :building_age %>
-  </div>
 
-  <div class="field">
     <%= form.label :remarks %>
     <%= form.text_area :remarks %>
+  </div>
+
+  <div>
+    <% n = 0 %>
+    <%= form.fields_for :nearest_stations do |nearstat| %>
+    <h2>Name of railway line <%= n += 1 %></h2>
+
+    <p>
+      <%= nearstat.label :Name_of_railway %>
+      <%= nearstat.text_area :name %>
+    </p>
+
+    <p>
+      <%= nearstat.label :Station_name %>
+      <%= nearstat.text_area :railway %>
+    </p>
+
+    <p>
+      <%= nearstat.label :How_many_minutes_walk %>
+      <%= nearstat.number_field :time %><span> min/mins </span>
+    </p>
+    <% end %>
   </div>
 
   <div class="actions">
