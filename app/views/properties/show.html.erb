@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Protery Details</h1>
+
 <p>
   <strong>Property:</strong>
-  <%= @property.property %>
+  <%= @property.propert %>
 </p>
 
 <p>
@@ -25,5 +27,27 @@
   <%= @property.remarks %>
 </p>
 
-<%= link_to 'Edit', edit_property_path(@property) %> |
+<div>
+  <% n = 0 %>
+  <% @property.nearest_stations.each do |nearest_station| %>
+    <h2>Nearest station<%= n += 1 %></h2>
+
+      <p>
+        <strong>Name Of Railway:</strong>
+        <%= nearest_station.name %>
+      </p>
+
+      <p>
+        <strong>Station Name:</strong>
+        <%= nearest_station.railway %>
+      </p>
+
+      <p>
+        <strong>Minute to reach:</strong>
+        <%= nearest_station.time %>
+      </p>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_property_path %> |
 <%= link_to 'Back', properties_path %>
